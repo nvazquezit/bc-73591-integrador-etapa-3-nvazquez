@@ -1,6 +1,7 @@
 import express from 'express'
 import 'dotenv/config'
 import connection from './utils/connection.js'
+import routerProductos from './routers/productos.router.js'
 
 
 // ! Constantes
@@ -9,14 +10,17 @@ const PORT = 8080
 const URI_DB = process.env.URI_LOCAL
 console.log(URI_DB);
 
-// ! Configuraciones
+// ! Middleware
 
+app.use(express.json())
 
-
-// ! Rutas
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
+
+
+// ! Rutas
+app.use('/api/v1/productos', routerProductos)
 
 
 // ! Arranque del servidor
