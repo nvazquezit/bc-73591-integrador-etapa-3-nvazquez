@@ -1,27 +1,28 @@
+//const express = require('express')
 import express from 'express'
 import 'dotenv/config'
 import connection from './utils/connection.js'
 import routerProductos from './routers/productos.router.js'
-
+import routerUsuarios from './routers/usuarios.router.js'
 
 // ! Constantes
 const app = express()
 const PORT = 8080
 const URI_DB = process.env.URI_LOCAL
-console.log(URI_DB);
+//console.log(URI_DB)
 
-// ! Middleware
+// ! Configuraciones
 
-app.use(express.json())
+// ! Middlewares
+app.use(express.json()) // Traduce a Express el objeto que llega por el body
+
+// ! Rutas
+app.use('/api/v1/productos', routerProductos)
+app.use('/api/v1/usuarios', routerUsuarios)
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
-
-
-// ! Rutas
-app.use('/api/v1/productos', routerProductos)
-
 
 // ! Arranque del servidor
 app.listen(PORT, (err) => {

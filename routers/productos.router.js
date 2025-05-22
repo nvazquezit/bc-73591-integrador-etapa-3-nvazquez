@@ -1,35 +1,22 @@
 import express from 'express'
+
+import productosController from '../controllers/productos.controller.js'
+// Constantes
 const routerProductos = express.Router()
 
+// ! CRUD Productos
+// CRUD -> R:READ ALL -> GET ALL -> http://localhost:8080/api/v1/productos
+routerProductos.get('/', productosController.getAll)
+// CRUD -> R:READ ONE -> GET ONE -> http://localhost:8080/api/v1/productos/id
+routerProductos.get('/:id', productosController.getOne)
   
-routerProductos.get('/', (req, res) => {
-    res.send('GET ALL')
-  })
+// CRUD -> C:CREATE -> POST -> http://localhost:8080/api/v1/productos + productoACrear
+routerProductos.post('/', productosController.create)
   
-routerProductos.get('/:id', (req, res) => {
-    const id = req.params.id
-    console.log(id)
-    res.send('GET ONE')
-  })
+// CRUD -> U:UPDATE -> PUT -> http://localhost:8080/api/v1/productos/id + productoAEditar
+routerProductos.put('/:id', productosController.update)
   
-routerProductos.post('/', (req, res) => {
-    const productoACrear = req.body
-    console.log(productoACrear)
-    res.send('CREATE Producto')
-  })
-  
-routerProductos.put('/:id', (req, res) => {
-    const id = req.params.id
-    const productoAEditar = req.body
-    console.log(id)
-    console.log(productoAEditar)
-    res.send('UPDATED Producto')
-  })
-  
-routerProductos.delete('/:id', (req, res) => {
-    const id = req.params.id
-    console.log(id);
-    res.send('DELETED Producto')
-  })
-  
+// CRUD -> D:DELETE -> DELETE -> http://localhost:8080/api/v1/productos/id
+routerProductos.delete('/:id', productosController.remove)
+
 export default routerProductos
