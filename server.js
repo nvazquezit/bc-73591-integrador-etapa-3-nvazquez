@@ -4,6 +4,7 @@ import 'dotenv/config'
 import connection from './utils/connection.js'
 import routerProductos from './routers/productos.router.js'
 import routerUsuarios from './routers/usuarios.router.js'
+import routerUploads from './routers/uploads.router.js'
 
 // ! Constantes
 const app = express()
@@ -19,6 +20,7 @@ app.use(express.json()) // Traduce a Express el objeto que llega por el body
 // ! Rutas
 app.use('/api/v1/productos', routerProductos)
 app.use('/api/v1/usuarios', routerUsuarios)
+app.use('/api/v1/uploads', routerUploads)
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
